@@ -9,10 +9,11 @@
       "email": "jordan@hall05.co.uk"
     }
   ],
-  "require": {},
+  "require": {
+    "php": "^7.4 || ^8.0"
+  },
   "require-dev": {
-    "phpunit/phpunit": "^5.7",
-    "satooshi/php-coveralls": "^2.0"
+    "phpunit/phpunit": "^9.6"
   },
   "autoload": {
     "psr-4": {
