@@ -17,12 +17,12 @@
   },
   "autoload": {
     "psr-4": {
-      "DivineOmega\\HCLParser\\": "./src/"
+      "JordJD\\HCLParser\\": "./src/"
     }
   },
   "scripts": {
     "post-autoload-dump": [
-      "DivineOmega\\HCLParser\\Installer::installBinaries"
+      "JordJD\\HCLParser\\Installer::installBinaries"
     ]
   },
   "replace": {

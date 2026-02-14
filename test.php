@@ -1,6 +1,6 @@
 <?php
 
-use DivineOmega\HCLParser\HCLParser;
+use JordJD\HCLParser\HCLParser;
 
 require __DIR__.'/vendor/autoload.php';
 

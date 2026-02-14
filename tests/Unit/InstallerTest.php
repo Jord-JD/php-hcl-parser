@@ -1,6 +1,6 @@
 <?php
 
-use DivineOmega\HCLParser\Installer;
+use JordJD\HCLParser\Installer;
 use PHPUnit\Framework\TestCase;
 
 class InstallerTest extends TestCase

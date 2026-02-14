@@ -1,6 +1,6 @@
 <?php
 
-use DivineOmega\HCLParser\HCLParser;
+use JordJD\HCLParser\HCLParser;
 use PHPUnit\Framework\TestCase;
 
 class BasicUsageTest extends TestCase

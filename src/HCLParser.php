@@ -1,6 +1,6 @@
 <?php
 
-namespace DivineOmega\HCLParser;
+namespace JordJD\HCLParser;
 
 /**
  * Class HCLParser.
