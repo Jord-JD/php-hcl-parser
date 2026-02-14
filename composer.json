@@ -1,27 +1,35 @@
 {
-    "name": "divineomega/php-hcl-parser",
-    "description": "PHP HCL Parser",
-    "type": "library",
-    "license": "LGPL-3.0-only",
-    "authors": [
-        {
-            "name": "Jordan Hall",
-            "email": "jordan@hall05.co.uk"
-        }
-    ],
-    "require": {},
-    "require-dev": {
-        "phpunit/phpunit": "^5.7",
-        "satooshi/php-coveralls": "^2.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "DivineOmega\\HCLParser\\": "./src/"
-        }
-    },
-    "scripts": {
-        "post-autoload-dump": [
-            "DivineOmega\\HCLParser\\Installer::installBinaries"
-        ]
+  "name": "jord-jd/php-hcl-parser",
+  "description": "PHP HCL Parser",
+  "type": "library",
+  "license": "LGPL-3.0-only",
+  "authors": [
+    {
+      "name": "Jordan Hall",
+      "email": "jordan@hall05.co.uk"
     }
+  ],
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "^5.7",
+    "satooshi/php-coveralls": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "DivineOmega\\HCLParser\\": "./src/"
+    }
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "DivineOmega\\HCLParser\\Installer::installBinaries"
+    ]
+  },
+  "replace": {
+    "divineomega/php-hcl-parser": "self.version"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "2.0-dev"
+    }
+  }
 }
