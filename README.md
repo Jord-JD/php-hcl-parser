@@ -1,12 +1,13 @@
 # ⚒🔀🐘 PHP HCL Parser
 
-[![Build Status](https://travis-ci.org/Jord-JD/php-hcl-parser.svg?branch=master)](https://travis-ci.org/Jord-JD/php-hcl-parser)
-[![Coverage Status](https://coveralls.io/repos/github/Jord-JD/php-hcl-parser/badge.svg?branch=master)](https://coveralls.io/github/Jord-JD/php-hcl-parser?branch=master)
+[![Tests](https://github.com/Jord-JD/php-hcl-parser/actions/workflows/tests.yml/badge.svg)](https://github.com/Jord-JD/php-hcl-parser/actions/workflows/tests.yml)
 
 HCL is a configuration language make by HashiCorp. HCL files are used by several HashiCorp products,
 including Terraform.
 
 This library parses HCL configuration files into PHP objects.
+
+> **Compatibility note:** The bundled `json2hcl` 0.0.6 converter supports legacy HCL syntax. Its upstream project is archived and does not provide ARM64 binaries, so this package is not suitable for modern HCL 2 syntax or ARM64 hosts.
 
 ## Installation
 
@@ -25,6 +26,8 @@ To parse HCL into a PHP object, create a new `HCLParser` object, passing it the 
 $hcl = file_get_contents('example.tf');
 $configObject = (new HCLParser($hcl))->parse();
 ```
+
+Invalid HCL, converter failures, and invalid converter output throw `JordJD\HCLParser\Exceptions\HCLParseException`. Downloaded converter binaries are checked against pinned SHA-256 hashes before they are installed.
 
 The resulting object will look similar to the following.
 

@@ -10,10 +10,11 @@
     }
   ],
   "require": {
-    "php": "^7.4 || ^8.0"
+    "php": "^7.4 || ^8.0",
+    "ext-json": "*"
   },
   "require-dev": {
-    "phpunit/phpunit": "^9.6"
+    "phpunit/phpunit": "^9.6 || ^10.5 || ^11.5 || ^12.0"
   },
   "autoload": {
     "psr-4": {
@@ -30,7 +31,12 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "2.0-dev"
+      "dev-master": "2.x-dev"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "kylekatarnls/update-helper": false
     }
   }
 }
