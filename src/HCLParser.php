@@ -2,29 +2,17 @@
 
 namespace JordJD\HCLParser;
 
-/**
- * Class HCLParser.
- */
+use JordJD\HCLParser\Exceptions\HCLParseException;
+
 class HCLParser
 {
-    /**
-     * @var
-     */
     private $hcl;
 
-    /**
-     * HCLParser constructor.
-     *
-     * @param $hcl
-     */
     public function __construct($hcl)
     {
         $this->hcl = $hcl;
     }
 
-    /**
-     * @return string
-     */
     private function getBinaryPath()
     {
         $binaryPath = __DIR__.'/../bin/'.Installer::getBinaryFilename();
@@ -36,23 +24,48 @@ class HCLParser
         return $binaryPath;
     }
 
-    /**
-     * @return string
-     */
     private function getJSONString()
     {
-        $command = $this->getBinaryPath().' --reverse <<\'EOF\''.PHP_EOL.$this->hcl.PHP_EOL.'EOF';
+        $pipes = [];
+        $process = proc_open(
+            [$this->getBinaryPath(), '--reverse'],
+            [
+                0 => ['pipe', 'r'],
+                1 => ['pipe', 'w'],
+                2 => ['pipe', 'w'],
+            ],
+            $pipes
+        );
 
-        exec($command, $lines);
+        if (!is_resource($process)) {
+            throw new HCLParseException('Unable to start the HCL parser process.');
+        }
 
-        return implode(PHP_EOL, $lines);
+        fwrite($pipes[0], $this->hcl);
+        fclose($pipes[0]);
+        $json = stream_get_contents($pipes[1]);
+        fclose($pipes[1]);
+        $error = stream_get_contents($pipes[2]);
+        fclose($pipes[2]);
+        $exitCode = proc_close($process);
+
+        if ($exitCode !== 0) {
+            throw new HCLParseException(
+                'The HCL parser failed'.($error ? ': '.trim($error) : '.')
+            );
+        }
+
+        return $json;
     }
 
-    /**
-     * @return mixed
-     */
     public function parse()
     {
-        return json_decode($this->getJSONString());
+        $decoded = json_decode($this->getJSONString());
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new HCLParseException('The HCL parser returned invalid JSON: '.json_last_error_msg());
+        }
+
+        return $decoded;
     }
 }

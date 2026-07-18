@@ -32,6 +32,10 @@ class InstallerTest extends TestCase
 
         foreach ($expectedFiles as $expectedFile) {
             $this->assertContains($expectedFile, $files);
+            $this->assertSame(
+                Installer::CHECKSUMS[$expectedFile],
+                hash_file('sha256', __DIR__.'/../../bin/'.$expectedFile)
+            );
         }
     }
 }
